@@ -76,7 +76,7 @@ def get_all_hitter_stats():
 
 all_hitters = get_all_hitter_stats()
 hitters_df = pd.DataFrame(all_hitters)
-hitters_df.to_csv("/Users/evanbok/mlb-dashboard/mlb_all_hitters.csv", mode="w", index=False)
+hitters_df.to_csv("mlb_all_hitters.csv", index=False)
 print(f"Done! Saved {len(hitters_df)} hitters")
 
 #API used: https://statsapi.mlb.com/api/v1/stats?stats=season&group=hitting&season=2026&limit=10&playerPool=ALL
