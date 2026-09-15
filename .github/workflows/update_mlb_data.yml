@@ -1,6 +1,6 @@
 name: Update MLB Data
 
-on:
+"on":
   schedule:
     - cron: "0 13 * * *"
   workflow_dispatch:
