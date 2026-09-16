@@ -2,7 +2,7 @@ name: Update MLB Data
 
 "on":
   schedule:
-    - cron: "15 15 * * *"
+    - cron: "*/15 * *  * *"  # Runs every 15 minutes
   workflow_dispatch:
 
 permissions:
