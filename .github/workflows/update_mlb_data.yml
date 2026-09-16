@@ -2,7 +2,8 @@ name: Update MLB Data
 
 "on":
   schedule:
-    - cron: "0 13 * * *"
+    - cron: "00 9 * * *"
+    timezone: "America/Denver"
   workflow_dispatch:
 
 permissions:
