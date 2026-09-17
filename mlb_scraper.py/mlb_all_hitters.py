@@ -86,7 +86,10 @@ hitters_df.to_csv("mlb_all_hitters.csv", index=False)
 #Update to Google Sheets
 if os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON"):
     credentials_info = json.loads(os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON"))
-    credentials = Credentials.from_service_account_info(credentials_info)
+    credentials = Credentials.from_service_account_info(
+    credentials_info,
+    scopes=["https://www.googleapis.com/auth/spreadsheets"]
+)
     gc = gspread.authorize(credentials)
 else:
     gc = gspread.service_account(
