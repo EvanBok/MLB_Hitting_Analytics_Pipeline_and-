@@ -22,9 +22,12 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install pandas requests
+        run: pip install pandas requests gspread google-auth
 
       - name: Run MLB scraper
+        env: 
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+    
         run: python mlb_scraper.py/mlb_all_hitters.py
 
       - name: Commit updated CSV

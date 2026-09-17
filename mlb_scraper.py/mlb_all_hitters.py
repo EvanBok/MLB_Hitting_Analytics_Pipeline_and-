@@ -2,6 +2,9 @@ import requests
 import pandas as pd
 from datetime import date
 import os
+import gspread
+import json
+from google.oauth2.service_account import Credentials
 
 team_abbrev = {
     "Arizona Diamondbacks": "ARI",
@@ -76,7 +79,27 @@ def get_all_hitter_stats():
 
 all_hitters = get_all_hitter_stats()
 hitters_df = pd.DataFrame(all_hitters)
+
+#Save CSV
 hitters_df.to_csv("mlb_all_hitters.csv", index=False)
+
+#Update to Google Sheets
+if os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON"):
+    credentials_info = json.loads(os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON"))
+    credentials = Credentials.from_service_account_info(credentials_info)
+    gc = gspread.authorize(credentials)
+else:
+    gc = gspread.service_account(
+        filename="/Users/evanbok/Downloads/mlb-hitting-pipeline-3a18c9b4f3ec.json"
+    )
+sheet = gc.open_by_key("1iTVgDVe45go9WtEtgxzAfTgCvXfjzsZzozXS_eE8SRs").sheet1
+print("Connected to sheet:", sheet.spreadsheet.title)
+sheet.clear()
+sheet.update(
+    [hitters_df.columns.tolist()] +
+    hitters_df.fillna("").astype(str).values.tolist()
+)
+
 print(f"Done! Saved {len(hitters_df)} hitters")
 
 #API used: https://statsapi.mlb.com/api/v1/stats?stats=season&group=hitting&season=2026&limit=10&playerPool=ALL
