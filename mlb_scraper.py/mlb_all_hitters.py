@@ -46,7 +46,7 @@ def get_all_hitter_stats():
         "stats": "season",
         "group": "hitting",
         "season": date.today().year,
-        "limit": 300,
+        "limit": 1000,
         "offset": 0,
         "playerPool": "ALL"
     }
@@ -98,9 +98,10 @@ else:
 sheet = gc.open_by_key("1iTVgDVe45go9WtEtgxzAfTgCvXfjzsZzozXS_eE8SRs").sheet1
 print("Connected to sheet:", sheet.spreadsheet.title)
 sheet.clear()
+hitters_df["scrape_date"] = hitters_df["scrape_date"].astype(str)
 sheet.update(
     [hitters_df.columns.tolist()] +
-    hitters_df.fillna("").astype(str).values.tolist()
+    hitters_df.astype(object).where(pd.notna(hitters_df), "").values.tolist()
 )
 
 print(f"Done! Saved {len(hitters_df)} hitters")
