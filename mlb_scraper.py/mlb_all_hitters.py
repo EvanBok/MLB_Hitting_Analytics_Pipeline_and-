@@ -59,6 +59,7 @@ def get_all_hitter_stats():
             "player": player["player"]["fullName"],
             "team": player["team"]["name"],
             "team_abbrev": team_abbrev.get(player["team"]["name"], player["team"]["name"]),
+            "position": player["position"]["abbreviation"],
             "avg": stat.get("avg"),
             "hits": stat.get("hits"),
             "homeRuns": stat.get("homeRuns"),
