@@ -4,4 +4,4 @@ An automated MLB data pipeline that retrieves player hitting statistics from the
 
 ### Interactive Dashboard
 
-[View the MLB Hitting Analytics Dashboard on Tableau Public]([YOUR_TABLEAU_LINK_HERE](https://public.tableau.com/views/MLB_all_hitters/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link))
+[View the MLB Hitting Analytics Dashboard on Tableau Public](https://public.tableau.com/views/MLB_all_hitters/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
